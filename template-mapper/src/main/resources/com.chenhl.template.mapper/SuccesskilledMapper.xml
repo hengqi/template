@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chenhl.template.mapper.SuccesskilledMapper">
+    <resultMap id="BaseResultMap" type="com.chenhl.template.domain.Successkilled">
+        <id column="seckill_id" property="seckillId" jdbcType="BIGINT"/>
+        <id column="user_phone" property="userPhone" jdbcType="VARCHAR"/>
+        <result column="seckill_state" property="seckillState" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    seckill_id, user_phone, seckill_state, create_time
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.chenhl.template.domain.SuccesskilledExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from success_killed
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+            parameterType="com.chenhl.template.domain.SuccesskilledKey">
+        select
+        <include refid="Base_Column_List"/>
+        from success_killed
+        where seckill_id = #{seckillId,jdbcType=BIGINT}
+        and user_phone = #{userPhone,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.chenhl.template.domain.SuccesskilledKey">
+    delete from success_killed
+    where seckill_id = #{seckillId,jdbcType=BIGINT}
+      and user_phone = #{userPhone,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.chenhl.template.domain.SuccesskilledExample">
+        delete from success_killed
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.chenhl.template.domain.Successkilled">
+    <!-- 忽略主键冲突 -->
+    insert ignore into success_killed (seckill_id, user_phone, seckill_state,
+      create_time)
+    values (#{seckillId,jdbcType=BIGINT}, #{userPhone,jdbcType=VARCHAR}, #{seckillState,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.chenhl.template.domain.Successkilled">
+        insert into success_killed
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="seckillId != null">
+                seckill_id,
+            </if>
+            <if test="userPhone != null">
+                user_phone,
+            </if>
+            <if test="seckillState != null">
+                seckill_state,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="seckillId != null">
+                #{seckillId,jdbcType=BIGINT},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="seckillState != null">
+                #{seckillState,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.chenhl.template.domain.SuccesskilledExample"
+            resultType="java.lang.Integer">
+        select count(*) from success_killed
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update success_killed
+        <set>
+            <if test="record.seckillId != null">
+                seckill_id = #{record.seckillId,jdbcType=BIGINT},
+            </if>
+            <if test="record.userPhone != null">
+                user_phone = #{record.userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.seckillState != null">
+                seckill_state = #{record.seckillState,jdbcType=TINYINT},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update success_killed
+        set seckill_id = #{record.seckillId,jdbcType=BIGINT},
+        user_phone = #{record.userPhone,jdbcType=VARCHAR},
+        seckill_state = #{record.seckillState,jdbcType=TINYINT},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.chenhl.template.domain.Successkilled">
+        update success_killed
+        <set>
+            <if test="seckillState != null">
+                seckill_state = #{seckillState,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where seckill_id = #{seckillId,jdbcType=BIGINT}
+        and user_phone = #{userPhone,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.chenhl.template.domain.Successkilled">
+    update success_killed
+    set seckill_state = #{seckillState,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where seckill_id = #{seckillId,jdbcType=BIGINT}
+      and user_phone = #{userPhone,jdbcType=VARCHAR}
+  </update>
+    <select id="queryByIdWithSeckill" resultType="Successkilled">
+        SELECT
+          sk.seckill_id,
+          sk.user_phone,
+          sk.create_time,
+          sk.seckillState,
+          s.seckill_id "seckill.seckill_id",
+          s.goods_name "seckill.goods_name",
+          s.goods_stock "seckill.goods_stock",
+          s.start_time "seckill.start_time",
+          s.end_time "seckill.end_time",
+          s.create_time "seckill.create_time"
+        FROM success_killed sk
+        inner join seckill s on sk.seckill_id = s.seckill_id
+        where sk.seckill_id=#{seckillId}
+
+    </select>
+</mapper>

@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chenhl.template.mapper.AcctRequestMapper" >
+  <resultMap id="BaseResultMap" type="com.chenhl.template.domain.AcctRequest" >
+    <id column="acctRequestId" property="acctrequestid" jdbcType="BIGINT" />
+    <result column="accountingRequestExtId" property="accountingrequestextid" jdbcType="BIGINT" />
+    <result column="businessPartId" property="businesspartid" jdbcType="VARCHAR" />
+    <result column="externalTradeNum" property="externaltradenum" jdbcType="VARCHAR" />
+    <result column="externalTradeType" property="externaltradetype" jdbcType="VARCHAR" />
+    <result column="externalSubTradeNum" property="externalsubtradenum" jdbcType="VARCHAR" />
+    <result column="externalSubTradeType" property="externalsubtradetype" jdbcType="VARCHAR" />
+    <result column="businessAbstract" property="businessabstract" jdbcType="VARCHAR" />
+    <result column="messageBody" property="messagebody" jdbcType="VARCHAR" />
+    <result column="errorCode" property="errorcode" jdbcType="VARCHAR" />
+    <result column="errorMsg" property="errormsg" jdbcType="VARCHAR" />
+    <result column="accountingStatus" property="accountingstatus" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="inputDate" property="inputdate" jdbcType="TIMESTAMP" />
+    <result column="stampDate" property="stampdate" jdbcType="TIMESTAMP" />
+    <result column="inputMan" property="inputman" jdbcType="VARCHAR" />
+    <result column="stampMan" property="stampman" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    acctRequestId, accountingRequestExtId, businessPartId, externalTradeNum, externalTradeType, 
+    externalSubTradeNum, externalSubTradeType, businessAbstract, messageBody, errorCode, 
+    errorMsg, accountingStatus, url, inputDate, stampDate, inputMan, stampMan
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.chenhl.template.domain.AcctRequestExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from AcctRequest
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from AcctRequest
+    where acctRequestId = #{acctrequestid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from AcctRequest
+    where acctRequestId = #{acctrequestid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chenhl.template.domain.AcctRequestExample" >
+    delete from AcctRequest
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chenhl.template.domain.AcctRequest" >
+    insert into AcctRequest (acctRequestId, accountingRequestExtId, 
+      businessPartId, externalTradeNum, externalTradeType, 
+      externalSubTradeNum, externalSubTradeType, 
+      businessAbstract, messageBody, errorCode, 
+      errorMsg, accountingStatus, url, 
+      inputDate, stampDate, inputMan, 
+      stampMan)
+    values (#{acctrequestid,jdbcType=BIGINT}, #{accountingrequestextid,jdbcType=BIGINT}, 
+      #{businesspartid,jdbcType=VARCHAR}, #{externaltradenum,jdbcType=VARCHAR}, #{externaltradetype,jdbcType=VARCHAR}, 
+      #{externalsubtradenum,jdbcType=VARCHAR}, #{externalsubtradetype,jdbcType=VARCHAR}, 
+      #{businessabstract,jdbcType=VARCHAR}, #{messagebody,jdbcType=VARCHAR}, #{errorcode,jdbcType=VARCHAR}, 
+      #{errormsg,jdbcType=VARCHAR}, #{accountingstatus,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{inputdate,jdbcType=TIMESTAMP}, #{stampdate,jdbcType=TIMESTAMP}, #{inputman,jdbcType=VARCHAR}, 
+      #{stampman,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chenhl.template.domain.AcctRequest" >
+    insert into AcctRequest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="acctrequestid != null" >
+        acctRequestId,
+      </if>
+      <if test="accountingrequestextid != null" >
+        accountingRequestExtId,
+      </if>
+      <if test="businesspartid != null" >
+        businessPartId,
+      </if>
+      <if test="externaltradenum != null" >
+        externalTradeNum,
+      </if>
+      <if test="externaltradetype != null" >
+        externalTradeType,
+      </if>
+      <if test="externalsubtradenum != null" >
+        externalSubTradeNum,
+      </if>
+      <if test="externalsubtradetype != null" >
+        externalSubTradeType,
+      </if>
+      <if test="businessabstract != null" >
+        businessAbstract,
+      </if>
+      <if test="messagebody != null" >
+        messageBody,
+      </if>
+      <if test="errorcode != null" >
+        errorCode,
+      </if>
+      <if test="errormsg != null" >
+        errorMsg,
+      </if>
+      <if test="accountingstatus != null" >
+        accountingStatus,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="inputdate != null" >
+        inputDate,
+      </if>
+      <if test="stampdate != null" >
+        stampDate,
+      </if>
+      <if test="inputman != null" >
+        inputMan,
+      </if>
+      <if test="stampman != null" >
+        stampMan,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="acctrequestid != null" >
+        #{acctrequestid,jdbcType=BIGINT},
+      </if>
+      <if test="accountingrequestextid != null" >
+        #{accountingrequestextid,jdbcType=BIGINT},
+      </if>
+      <if test="businesspartid != null" >
+        #{businesspartid,jdbcType=VARCHAR},
+      </if>
+      <if test="externaltradenum != null" >
+        #{externaltradenum,jdbcType=VARCHAR},
+      </if>
+      <if test="externaltradetype != null" >
+        #{externaltradetype,jdbcType=VARCHAR},
+      </if>
+      <if test="externalsubtradenum != null" >
+        #{externalsubtradenum,jdbcType=VARCHAR},
+      </if>
+      <if test="externalsubtradetype != null" >
+        #{externalsubtradetype,jdbcType=VARCHAR},
+      </if>
+      <if test="businessabstract != null" >
+        #{businessabstract,jdbcType=VARCHAR},
+      </if>
+      <if test="messagebody != null" >
+        #{messagebody,jdbcType=VARCHAR},
+      </if>
+      <if test="errorcode != null" >
+        #{errorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="errormsg != null" >
+        #{errormsg,jdbcType=VARCHAR},
+      </if>
+      <if test="accountingstatus != null" >
+        #{accountingstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="inputdate != null" >
+        #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stampdate != null" >
+        #{stampdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inputman != null" >
+        #{inputman,jdbcType=VARCHAR},
+      </if>
+      <if test="stampman != null" >
+        #{stampman,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chenhl.template.domain.AcctRequestExample" resultType="java.lang.Integer" >
+    select count(*) from AcctRequest
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update AcctRequest
+    <set >
+      <if test="record.acctrequestid != null" >
+        acctRequestId = #{record.acctrequestid,jdbcType=BIGINT},
+      </if>
+      <if test="record.accountingrequestextid != null" >
+        accountingRequestExtId = #{record.accountingrequestextid,jdbcType=BIGINT},
+      </if>
+      <if test="record.businesspartid != null" >
+        businessPartId = #{record.businesspartid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.externaltradenum != null" >
+        externalTradeNum = #{record.externaltradenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.externaltradetype != null" >
+        externalTradeType = #{record.externaltradetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.externalsubtradenum != null" >
+        externalSubTradeNum = #{record.externalsubtradenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.externalsubtradetype != null" >
+        externalSubTradeType = #{record.externalsubtradetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessabstract != null" >
+        businessAbstract = #{record.businessabstract,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messagebody != null" >
+        messageBody = #{record.messagebody,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorcode != null" >
+        errorCode = #{record.errorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errormsg != null" >
+        errorMsg = #{record.errormsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountingstatus != null" >
+        accountingStatus = #{record.accountingstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputdate != null" >
+        inputDate = #{record.inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stampdate != null" >
+        stampDate = #{record.stampdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inputman != null" >
+        inputMan = #{record.inputman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stampman != null" >
+        stampMan = #{record.stampman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update AcctRequest
+    set acctRequestId = #{record.acctrequestid,jdbcType=BIGINT},
+      accountingRequestExtId = #{record.accountingrequestextid,jdbcType=BIGINT},
+      businessPartId = #{record.businesspartid,jdbcType=VARCHAR},
+      externalTradeNum = #{record.externaltradenum,jdbcType=VARCHAR},
+      externalTradeType = #{record.externaltradetype,jdbcType=VARCHAR},
+      externalSubTradeNum = #{record.externalsubtradenum,jdbcType=VARCHAR},
+      externalSubTradeType = #{record.externalsubtradetype,jdbcType=VARCHAR},
+      businessAbstract = #{record.businessabstract,jdbcType=VARCHAR},
+      messageBody = #{record.messagebody,jdbcType=VARCHAR},
+      errorCode = #{record.errorcode,jdbcType=VARCHAR},
+      errorMsg = #{record.errormsg,jdbcType=VARCHAR},
+      accountingStatus = #{record.accountingstatus,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      inputDate = #{record.inputdate,jdbcType=TIMESTAMP},
+      stampDate = #{record.stampdate,jdbcType=TIMESTAMP},
+      inputMan = #{record.inputman,jdbcType=VARCHAR},
+      stampMan = #{record.stampman,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chenhl.template.domain.AcctRequest" >
+    update AcctRequest
+    <set >
+      <if test="accountingrequestextid != null" >
+        accountingRequestExtId = #{accountingrequestextid,jdbcType=BIGINT},
+      </if>
+      <if test="businesspartid != null" >
+        businessPartId = #{businesspartid,jdbcType=VARCHAR},
+      </if>
+      <if test="externaltradenum != null" >
+        externalTradeNum = #{externaltradenum,jdbcType=VARCHAR},
+      </if>
+      <if test="externaltradetype != null" >
+        externalTradeType = #{externaltradetype,jdbcType=VARCHAR},
+      </if>
+      <if test="externalsubtradenum != null" >
+        externalSubTradeNum = #{externalsubtradenum,jdbcType=VARCHAR},
+      </if>
+      <if test="externalsubtradetype != null" >
+        externalSubTradeType = #{externalsubtradetype,jdbcType=VARCHAR},
+      </if>
+      <if test="businessabstract != null" >
+        businessAbstract = #{businessabstract,jdbcType=VARCHAR},
+      </if>
+      <if test="messagebody != null" >
+        messageBody = #{messagebody,jdbcType=VARCHAR},
+      </if>
+      <if test="errorcode != null" >
+        errorCode = #{errorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="errormsg != null" >
+        errorMsg = #{errormsg,jdbcType=VARCHAR},
+      </if>
+      <if test="accountingstatus != null" >
+        accountingStatus = #{accountingstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="inputdate != null" >
+        inputDate = #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stampdate != null" >
+        stampDate = #{stampdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inputman != null" >
+        inputMan = #{inputman,jdbcType=VARCHAR},
+      </if>
+      <if test="stampman != null" >
+        stampMan = #{stampman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where acctRequestId = #{acctrequestid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chenhl.template.domain.AcctRequest" >
+    update AcctRequest
+    set accountingRequestExtId = #{accountingrequestextid,jdbcType=BIGINT},
+      businessPartId = #{businesspartid,jdbcType=VARCHAR},
+      externalTradeNum = #{externaltradenum,jdbcType=VARCHAR},
+      externalTradeType = #{externaltradetype,jdbcType=VARCHAR},
+      externalSubTradeNum = #{externalsubtradenum,jdbcType=VARCHAR},
+      externalSubTradeType = #{externalsubtradetype,jdbcType=VARCHAR},
+      businessAbstract = #{businessabstract,jdbcType=VARCHAR},
+      messageBody = #{messagebody,jdbcType=VARCHAR},
+      errorCode = #{errorcode,jdbcType=VARCHAR},
+      errorMsg = #{errormsg,jdbcType=VARCHAR},
+      accountingStatus = #{accountingstatus,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      inputDate = #{inputdate,jdbcType=TIMESTAMP},
+      stampDate = #{stampdate,jdbcType=TIMESTAMP},
+      inputMan = #{inputman,jdbcType=VARCHAR},
+      stampMan = #{stampman,jdbcType=VARCHAR}
+    where acctRequestId = #{acctrequestid,jdbcType=BIGINT}
+  </update>
+</mapper>

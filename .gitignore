@@ -1,0 +1,12 @@
+.idea/
+template-common/target/
+template-common/*.iml
+template-domain/target/
+template-domain/*.iml
+template-mapper/target
+template-mapper/*.iml
+template-service/target/
+template-service/*.iml
+template-web/target
+template-web/*.iml
+template.iml
